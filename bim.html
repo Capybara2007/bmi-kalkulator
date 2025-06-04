@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Matematika iza mikroskopa – BMI kalkulator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f8ff;
+      text-align: center;
+      padding: 30px;
+    }
+
+    h1 {
+      color: #0077cc;
+    }
+
+    .container {
+      background-color: white;
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 400px;
+      margin: 0 auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #rezultat {
+      margin-top: 20px;
+      font-size: 1.2rem;
+    }
+
+    .autori {
+      margin-top: 40px;
+      font-style: italic;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+  <h1>Matematika iza mikroskopa</h1>
+  <div class="container">
+    <h2>BMI kalkulator</h2>
+    <label for="visina">Visina (u centimetrima):</label>
+    <input type="number" id="visina" placeholder="npr. 170" />
+
+    <label for="tezina">Težina (u kilogramima):</label>
+    <input type="number" id="tezina" placeholder="npr. 65" />
+
+    <button onclick="izracunajBMI()">Izračunaj BMI</button>
+
+    <div id="rezultat"></div>
+  </div>
+
+  <div class="autori">
+   <h1>Aleksa Jovanović<br> Dimitrije Stojković <br>Milojević Luka <br>3-9</h1>
+  </div>
+
+  <script>
+    function izracunajBMI() {
+      const visina = parseFloat(document.getElementById('visina').value);
+      const tezina = parseFloat(document.getElementById('tezina').value);
+      const rezultatDiv = document.getElementById('rezultat');
+
+      if (!visina || !tezina || visina <= 0 || tezina <= 0) {
+        rezultatDiv.innerHTML = "Unesite ispravne vrednosti.";
+        return;
+      }
+
+      const visinaUMetrima = visina / 100;
+      const bmi = tezina / (visinaUMetrima * visinaUMetrima);
+      let status = "";
+
+      if (bmi < 18.5) status = "Nedovoljna telesna masa";
+      else if (bmi < 25) status = "Normalna telesna masa";
+      else if (bmi < 30) status = "Povećana telesna masa";
+      else status = "Gojaznost";
+
+      rezultatDiv.innerHTML = `Vaš BMI je <strong>${bmi.toFixed(2)}</strong> – ${status}.`;
+    }
+  </script>
+</body>
+</html>
